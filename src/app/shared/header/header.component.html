@@ -1,0 +1,21 @@
+<div class="header-container container-fluid">
+  <div class="row">
+    <!-- <mat-toolbar color="primary" class="toolbar"> -->
+
+
+    <div class="col-4 header-container-section">
+      <h1 (click)="goToInfoPage()">Moje notatki</h1>
+    </div>
+    <div class="col-8 text-right header-container-section">
+      <div *ngIf="isVisible">
+        <button class="header-btn" (click)="login()">Zaloguj się</button>
+      </div>
+      <div *ngIf="authService.userIdentity">
+        <span class="hello-user">Witaj, {{authService.userIdentity.userRole}}</span>
+        <button class="header-btn" (click)="logout()">Wyloguj się</button>
+      </div>
+    </div>
+    <!-- </mat-toolbar> -->
+  </div>
+
+</div>

@@ -1,0 +1,14 @@
+<div class="row section-container">
+  <div class="col-sm-4 login-content">
+    <h3>Logowanie</h3>
+    <mat-form-field class="d-block">
+      <input matInput placeholder="Adres email" required [(ngModel)]="email">
+      <mat-error>Adres email jest wymagany</mat-error>
+    </mat-form-field>
+    <mat-form-field class="d-block">
+      <input matInput placeholder="Hasło" required [(ngModel)]="password">
+      <mat-error>Hasło jest wymagane</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="submit()">Zaloguj się</button>
+  </div>
+</div>

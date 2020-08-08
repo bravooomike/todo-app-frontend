@@ -1,0 +1,42 @@
+.header-container {
+  min-height: 10%;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #3F51B5;
+
+  .header-container-section {
+    // border: 1px solid red;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    &:first-child {
+      justify-content: flex-start;
+    }
+  }
+
+  h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .header-btn {
+    border: 2px solid #fff;
+    padding: 5px 10px;
+    background-color: transparent;
+    color: #fff;
+
+    &:hover {
+      transition: all 300ms;
+      background-color: #fff;
+      color: #3F51B5;
+    }
+  }
+
+  .hello-user {
+    color: #fff;
+    margin-right: 30px;
+  }
+}
