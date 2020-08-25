@@ -29,7 +29,8 @@ export class AuthService {
       .pipe(
         map((user) => {
           this.userIdentity = user;
-          // console.log("UserIdentity: ", this.userIdentity);
+
+          console.log("UserIdentity: ", this.userIdentity);
           return user;
         })
       );

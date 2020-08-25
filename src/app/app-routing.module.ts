@@ -4,6 +4,8 @@ import { AuthService } from "./login/auth.service";
 import { NgModule } from "@angular/core";
 import { Route, RouterModule } from "@angular/router";
 import { InfoPageComponent } from "./info-page/info-page.component";
+import { AuthResolver } from "./login/auth.resolver";
+import { AuthGuard } from "./login/auth.guard";
 
 const APP_ROUTES: Route[] = [
   { path: "", pathMatch: "full", redirectTo: "infoPage" },
@@ -11,10 +13,16 @@ const APP_ROUTES: Route[] = [
   // { path: "login", component: LoginComponent },
   {
     path: "",
+    resolve: { userIdentity: AuthResolver },
     children: [
       { path: "infoPage", component: InfoPageComponent },
       { path: "login", component: LoginComponent },
-      { path: "task", component: TaskComponent },
+      {
+        path: "task",
+        component: TaskComponent,
+        canActivate: [AuthGuard],
+        data: { roleTypes: ["[ADMIN]"] },
+      },
     ],
   },
 ];

@@ -13,6 +13,9 @@ import { MaterialModule } from "./material/material.module";
 import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { AuthResolver } from "./login/auth.resolver";
+import { AuthInterceptor } from "./login/auth.interceptor";
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,8 +32,13 @@ import { AppRoutingModule } from "./app-routing.module";
     InfoPageModule,
     AppRoutingModule,
     TaskModule,
+    FontAwesomeModule,
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    AuthResolver,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

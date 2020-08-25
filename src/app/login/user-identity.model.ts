@@ -1,4 +1,5 @@
 export class UserIdentity {
-  email: string;
+  firstName: string;
+  lastName: string;
   userRole: string;
 }

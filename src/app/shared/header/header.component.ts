@@ -26,7 +26,9 @@ export class HeaderComponent implements OnInit {
   public goToInfoPage() {
     if (!this.authService.userIdentity) {
       this.isVisible = true;
+      this.router.navigateByUrl("/infoPage");
+    } else {
+      this.router.navigateByUrl("/task");
     }
-    this.router.navigateByUrl("/infoPage");
   }
 }

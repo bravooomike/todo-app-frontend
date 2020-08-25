@@ -5,6 +5,7 @@ import { LoginComponent } from "./login.component";
 import { MaterialModule } from "../material/material.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
+import { AuthResolver } from "./auth.resolver";
 
 @NgModule({
   declarations: [LoginComponent],
@@ -16,6 +17,6 @@ import { RouterModule } from "@angular/router";
     RouterModule,
   ],
   exports: [LoginComponent],
-  providers: [AuthService],
+  providers: [AuthService, AuthResolver],
 })
 export class LoginModule {}
