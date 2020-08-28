@@ -8,6 +8,6 @@ export class TaskService {
   constructor(private httpClient: HttpClient) {}
 
   public getAll() {
-    return this.httpClient.get("/rest/todo/task");
+    return this.httpClient.get("/rest/todo/task/");
   }
 }

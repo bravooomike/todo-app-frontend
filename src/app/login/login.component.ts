@@ -13,7 +13,6 @@ export class LoginComponent implements OnInit {
   public title: string = "Panel logowania";
 
   constructor(private authService: AuthService, private router: Router) {}
-  // constructor() {}
 
   ngOnInit() {}
 
@@ -23,7 +22,8 @@ export class LoginComponent implements OnInit {
     if (!this.email || !this.password) {
       return;
     }
-    this.authService.login(this.email, this.password).subscribe(() => {
+    this.authService.login(this.email, this.password).subscribe((user) => {
+      console.log(user);
       this.router.navigateByUrl("/task");
     });
   }

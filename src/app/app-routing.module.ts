@@ -21,7 +21,7 @@ const APP_ROUTES: Route[] = [
         path: "task",
         component: TaskComponent,
         canActivate: [AuthGuard],
-        data: { roleTypes: ["[ADMIN]"] },
+        data: { roleTypes: ["ADMIN", "USER"] },
       },
     ],
   },

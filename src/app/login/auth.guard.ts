@@ -24,6 +24,7 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     const roleTypes: string[] = next.data["roleTypes"];
+    console.log(this.hasAnyPermission(roleTypes));
 
     if (this.authService.userIdentity) {
       return this.hasAnyPermission(roleTypes);
@@ -38,8 +39,10 @@ export class AuthGuard implements CanActivate {
 
   public hasAnyPermission(roleTypes: string[]) {
     if (this.authService.userIdentity) {
-      return roleTypes.some(
-        (role) => this.authService.userIdentity.userRole === role
+      return roleTypes.some((role) =>
+        this.authService.userIdentity.userRoles.some(
+          (userRole) => userRole === role
+        )
       );
     } else {
       return false;
