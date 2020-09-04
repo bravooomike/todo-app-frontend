@@ -1,6 +1,7 @@
 import { TaskTypeService } from "./task-type.service";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { TaskType } from "./task-type.model";
+import { FormControl, FormControlName, FormGroup } from "@angular/forms";
 
 @Component({
   selector: "app-task-type",
@@ -9,6 +10,8 @@ import { TaskType } from "./task-type.model";
 })
 export class TaskTypeComponent implements OnInit {
   public taskTypes: TaskType[] = [];
+  // @Input() formGroup: FormGroup;
+  // @Input() formControlName: FormControl;
 
   constructor(private taskTypeService: TaskTypeService) {}
 
@@ -19,7 +22,8 @@ export class TaskTypeComponent implements OnInit {
   public getAll() {
     this.taskTypeService.getAll().subscribe((taskTypes) => {
       this.taskTypes = taskTypes;
-      console.log(this.taskTypes);
     });
   }
+
+  public controlValueAccesor() {}
 }

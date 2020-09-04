@@ -15,22 +15,18 @@
 
       <mat-form-field class="d-block">
         <mat-label>Typ zadania*</mat-label>
-        <mat-select formControlName="taskTypeCode" name="">
-          <mat-option value="zak">Zakupy</mat-option>
-          <mat-option value="szk">Szkoła</mat-option>
-          <mat-option value="pra">Praca</mat-option>
-          <mat-option value="inn">Inne</mat-option>
+        <mat-select formControlName="taskType" [(ngModel)]="taskForm.get('taskType').code">
+          <mat-option *ngFor="let taskType of taskTypes" [value]="taskType.code">{{taskType.name}}
+          </mat-option>
         </mat-select>
         <mat-error>Należy wybrać treść zadania</mat-error>
       </mat-form-field>
+      <!-- <app-task-type [formControlName]="taskForm.get('taskTypeCode')" [formGroup]="taskForm"></app-task-type> -->
 
       <mat-form-field class="d-block">
         <mat-label>Status zadania*</mat-label>
         <mat-select formControlName="taskStatusCode" name="">
-          <mat-option value="zap">Zaplanowane</mat-option>
-          <mat-option value="wtr">W trakcie</mat-option>
-          <mat-option value="zak">Zakończone</mat-option>
-          <!-- ngSelect -->
+          <mat-option *ngFor="let taskStatus of taskStatuses" [value]="taskStatus.code">{{taskStatus.name}}</mat-option>
         </mat-select>
         <mat-error>Należy wybrać status zadania</mat-error>
       </mat-form-field>
@@ -58,5 +54,4 @@
 
   </div>
 </div>
-<app-task-type></app-task-type>
 <!-- <pre>{{taskForm.value | json}}</pre> -->

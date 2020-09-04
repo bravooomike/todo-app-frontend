@@ -12,6 +12,7 @@ import { TaskEditComponent } from "./task-edit/task-edit.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TaskAddComponent } from "./task-add/task-add.component";
 import { TaskTypeComponent } from "./task-type/task-type.component";
+import { TaskStatusComponent } from "./task-status/task-status.component";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { TaskTypeComponent } from "./task-type/task-type.component";
     TaskEditComponent,
     TaskAddComponent,
     TaskTypeComponent,
+    TaskStatusComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +37,7 @@ import { TaskTypeComponent } from "./task-type/task-type.component";
     TaskEditComponent,
     TaskAddComponent,
     TaskTypeComponent,
+    TaskStatusComponent,
   ],
 })
 export class TaskModule {}

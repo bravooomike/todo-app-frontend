@@ -9,6 +9,7 @@ import { MaterialModule } from "../material/material.module";
 import { DateFormatterPipe } from "./pipes/date-formatter.pipe";
 import { PageTitleComponent } from "./page-title/page-title.component";
 import { MenuComponent } from "./menu/menu.component";
+import { TaskTypePipe } from "./pipes/task-type.pipe";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { MenuComponent } from "./menu/menu.component";
     DateFormatterPipe,
     PageTitleComponent,
     MenuComponent,
+    TaskTypePipe,
   ],
   imports: [CommonModule, RouterModule, MaterialModule, FontAwesomeModule],
   exports: [
@@ -23,6 +25,7 @@ import { MenuComponent } from "./menu/menu.component";
     DateFormatterPipe,
     PageTitleComponent,
     MenuComponent,
+    TaskTypePipe,
   ],
   providers: [AuthService, PageTitleSharedService],
 })

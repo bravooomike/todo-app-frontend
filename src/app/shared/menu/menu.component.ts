@@ -5,7 +5,7 @@ import {
   faPlusSquare,
   faCog,
   faUserCog,
-  faTools,
+  // faTools,
 } from "@fortawesome/free-solid-svg-icons";
 import { Router } from "@angular/router";
 import { AuthGuard } from "src/app/login/auth.guard";
@@ -20,7 +20,7 @@ export class MenuComponent implements OnInit {
   faPlusSquare = faPlusSquare;
   faCog = faCog;
   faUserCog = faUserCog;
-  faTools = faTools;
+  // faTools = faTools;
 
   constructor(
     private authService: AuthService,
