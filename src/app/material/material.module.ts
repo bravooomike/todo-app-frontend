@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+
 import {
   MatIconModule,
   MatCardModule,
@@ -19,6 +20,9 @@ import {
   MatDividerModule,
   MatListModule,
   MatSortModule,
+  MatDatepickerModule,
+  // MatDatepickerToggle,
+  // MatDatepicker,
 } from "@angular/material";
 
 const MATERIAL_MODULE = [
@@ -35,6 +39,9 @@ const MATERIAL_MODULE = [
   MatDividerModule,
   MatListModule,
   MatSortModule,
+  MatDatepickerModule,
+  // MatDatepickerToggle,
+  // MatDatepicker,
 ];
 
 @NgModule({

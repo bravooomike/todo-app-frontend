@@ -1,8 +1,19 @@
-<div class="main-container">
+<main class="app-wrapper d-flex justify-content-center align-items-center">
   <div class="app-container">
-    <app-header></app-header>
-    <div class="main-section-container">
-      <router-outlet></router-outlet>
+    <div class="content-container d-flex flex-column">
+      <app-header></app-header>
+      <!-- <div class="container-fluid title-menu-container"> -->
+      <div class="title-menu-container">
+        <div class="title">
+          <app-page-title></app-page-title>
+        </div>
+        <div class="menu">
+          <app-menu></app-menu>
+        </div>
+      </div>
+      <div class="main-container">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </div>
-</div>
+</main>

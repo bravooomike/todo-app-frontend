@@ -1,0 +1,62 @@
+<div class="section-container">
+  <div class="content d-flex flex-column">
+    <p class="h1 mb-4 text-center">Edytuj zadanie</p>
+    <!-- <form [formGroup]="taskForm" class="d-flex flex-column"> -->
+    <form [formGroup]="taskForm">
+
+      <mat-form-field class="d-block">
+        <input formControlName="summary" matInput placeholder="Zadanie" required>
+        <mat-error>Treść zadania jest wymagana</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="d-block">
+        <input formControlName="content" matInput placeholder="Szczegóły zadania">
+      </mat-form-field>
+
+      <mat-form-field class="d-block">
+        <mat-label>Typ zadania*</mat-label>
+        <mat-select formControlName="taskTypeCode" name="">
+          <mat-option value="zak">Zakupy</mat-option>
+          <mat-option value="szk">Szkoła</mat-option>
+          <mat-option value="pra">Praca</mat-option>
+          <mat-option value="inn">Inne</mat-option>
+        </mat-select>
+        <mat-error>Należy wybrać treść zadania</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="d-block">
+        <mat-label>Status zadania*</mat-label>
+        <mat-select formControlName="taskStatusCode" name="">
+          <mat-option value="zap">Zaplanowane</mat-option>
+          <mat-option value="wtr">W trakcie</mat-option>
+          <mat-option value="zak">Zakończone</mat-option>
+          <!-- ngSelect -->
+        </mat-select>
+        <mat-error>Należy wybrać status zadania</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="d-block">
+        <input matInput [ngxMatDatetimePicker]="pickercreatedDate" placeholder="Data dodania zadania"
+          formControlName="createdDate">
+        <mat-datepicker-toggle matSuffix [for]="pickercreatedDate"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #pickercreatedDate></ngx-mat-datetime-picker>
+        <mat-error>Należy dodać datę dodania zadania</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="d-block">
+        <input matInput [ngxMatDatetimePicker]="pickerexpiredDate" placeholder="Do kiedy zadanie ma zostać zakończone"
+          formControlName="expiredDate">
+        <mat-datepicker-toggle matSuffix [for]="pickerexpiredDate"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #pickerexpiredDate></ngx-mat-datetime-picker>
+        <mat-error>Należy dodać datę wskazującą do kiedy zadanie ma zostać zakończone</mat-error>
+      </mat-form-field>
+
+      <button (click)="editTask()" class="float-right" mat-raised-button color="primary">Zapisz</button>
+      <button (click)="back()" class="float-right" mat-stroked-button color="primary">Wróć</button>
+
+    </form>
+
+  </div>
+</div>
+<app-task-type></app-task-type>
+<!-- <pre>{{taskForm.value | json}}</pre> -->

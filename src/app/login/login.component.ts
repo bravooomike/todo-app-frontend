@@ -10,7 +10,6 @@ import { AuthService } from "./auth.service";
 export class LoginComponent implements OnInit {
   private email: string = "";
   private password: string = "";
-  public title: string = "Panel logowania";
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -23,7 +22,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.authService.login(this.email, this.password).subscribe((user) => {
-      console.log(user);
+      // console.log(user);
       this.router.navigateByUrl("/task");
     });
   }

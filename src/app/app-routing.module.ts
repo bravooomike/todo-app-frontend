@@ -1,3 +1,5 @@
+import { TaskResolveService } from "./task/task-resolve.service";
+import { TaskEditComponent } from "./task/task-edit/task-edit.component";
 import { TaskComponent } from "./task/task.component";
 import { LoginComponent } from "./login/login.component";
 import { AuthService } from "./login/auth.service";
@@ -6,6 +8,7 @@ import { Route, RouterModule } from "@angular/router";
 import { InfoPageComponent } from "./info-page/info-page.component";
 import { AuthResolver } from "./login/auth.resolver";
 import { AuthGuard } from "./login/auth.guard";
+import { TaskAddComponent } from "./task/task-add/task-add.component";
 
 const APP_ROUTES: Route[] = [
   { path: "", pathMatch: "full", redirectTo: "infoPage" },
@@ -22,6 +25,15 @@ const APP_ROUTES: Route[] = [
         component: TaskComponent,
         canActivate: [AuthGuard],
         data: { roleTypes: ["ADMIN", "USER"] },
+      },
+      {
+        path: "task/:id",
+        component: TaskEditComponent,
+        resolve: { task: TaskResolveService },
+      },
+      {
+        path: "add",
+        component: TaskAddComponent,
       },
     ],
   },

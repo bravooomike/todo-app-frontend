@@ -1,0 +1,17 @@
+button {
+  border: none;
+  padding: 0 0 0 1rem;
+  font-size: 3rem;
+  cursor: pointer;
+  background-color: transparent;
+
+  fa-icon {
+    transition: all 400ms;
+
+    &:hover {
+      color: #3F51B5;
+      text-shadow: 2px 2px 4px #000000;
+    }
+
+  }
+}

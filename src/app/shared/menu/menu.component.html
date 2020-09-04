@@ -1,0 +1,17 @@
+<div *ngIf="authService.userIdentity">
+  <button [routerLink]="['/task']">
+    <fa-icon [icon]="faListAlt"></fa-icon>
+  </button>
+  <button (click)="gotoAddTask()">
+    <fa-icon [icon]="faPlusSquare"></fa-icon>
+  </button>
+  <button *ngIf="authGuard.hasAnyPermission(['ADMIN'])">
+    <fa-icon [icon]="faUserCog"></fa-icon>
+  </button>
+  <button *ngIf="authGuard.hasAnyPermission(['ADMIN'])">
+    <fa-icon [icon]="faTools"></fa-icon>
+  </button>
+  <button>
+    <fa-icon [icon]="faCog"></fa-icon>
+  </button>
+</div>

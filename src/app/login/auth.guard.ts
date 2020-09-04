@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     const roleTypes: string[] = next.data["roleTypes"];
-    console.log(this.hasAnyPermission(roleTypes));
+    // console.log(this.hasAnyPermission(roleTypes));
 
     if (this.authService.userIdentity) {
       return this.hasAnyPermission(roleTypes);

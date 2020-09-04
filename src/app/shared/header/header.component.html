@@ -8,7 +8,7 @@
         <button class="header-btn" (click)="login()">Zaloguj się</button>
       </div>
       <div *ngIf="authService.userIdentity">
-        <span class="hello-user">Witaj, {{authService.userIdentity.firstName}}</span>
+        <span class="hello-user">Witaj, {{authService.userIdentity.firstName}} {{authService.userIdentity.lastName}}</span>
         <button class="header-btn" (click)="logout()">Wyloguj się</button>
       </div>
     </div>
