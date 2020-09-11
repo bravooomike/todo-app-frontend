@@ -8,6 +8,8 @@ import {
   UrlTree,
 } from "@angular/router";
 import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { UserIdentity } from "./user-identity.model";
 
 @Injectable({
   providedIn: "root",
@@ -24,13 +26,16 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     const roleTypes: string[] = next.data["roleTypes"];
-    // console.log(this.hasAnyPermission(roleTypes));
 
-    if (this.authService.userIdentity) {
-      return this.hasAnyPermission(roleTypes);
-    }
+    return this.authService.refresh().pipe(
+      map((user: UserIdentity) => {
+        if (user) {
+          return this.hasAnyPermission(roleTypes);
+        }
 
-    this.router.navigateByUrl("/login");
+        this.router.navigateByUrl("/login");
+      })
+    );
   }
 
   public hasPermission(role: string) {

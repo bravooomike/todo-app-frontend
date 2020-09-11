@@ -9,17 +9,20 @@ import { InfoPageComponent } from "./info-page/info-page.component";
 import { AuthResolver } from "./login/auth.resolver";
 import { AuthGuard } from "./login/auth.guard";
 import { TaskAddComponent } from "./task/task-add/task-add.component";
+import { LoginGuard } from "./login/login.guard";
 
 const APP_ROUTES: Route[] = [
   { path: "", pathMatch: "full", redirectTo: "infoPage" },
-  // { path: "infoPage", component: InfoPageComponent },
-  // { path: "login", component: LoginComponent },
   {
     path: "",
     resolve: { userIdentity: AuthResolver },
     children: [
-      { path: "infoPage", component: InfoPageComponent },
-      { path: "login", component: LoginComponent },
+      {
+        path: "infoPage",
+        component: InfoPageComponent,
+        canActivate: [LoginGuard],
+      },
+      { path: "login", component: LoginComponent, canActivate: [LoginGuard] },
       {
         path: "task",
         component: TaskComponent,
@@ -37,6 +40,7 @@ const APP_ROUTES: Route[] = [
       },
     ],
   },
+  // {path='/*', }
 ];
 
 @NgModule({

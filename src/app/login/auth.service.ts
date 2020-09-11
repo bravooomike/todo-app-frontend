@@ -2,9 +2,8 @@ import { Router } from "@angular/router";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { UserIdentity } from "./user-identity.model";
-import { Observable, pipe } from "rxjs";
-import { map } from "rxjs/operators";
-// import { User } from "../users/user.model";
+import { Observable, pipe, ObservableInput, of } from "rxjs";
+import { map, catchError } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",
@@ -37,6 +36,11 @@ export class AuthService {
 
   public refresh(): Observable<UserIdentity> {
     return this.httpClient.get<UserIdentity>(`${this.url}/`).pipe(
+      catchError((err) => {
+        console.log(err.status);
+        this.userIdentity = null;
+        return of(null);
+      }),
       map((user) => {
         this.userIdentity = user;
         return user;

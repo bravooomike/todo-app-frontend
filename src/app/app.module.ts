@@ -23,6 +23,7 @@ import {
   NgxMatTimepickerModule,
   NgxMatNativeDateModule,
 } from "@angular-material-components/datetime-picker";
+import { NgSelectModule } from "@ng-select/ng-select";
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,6 +44,7 @@ import {
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
+    NgSelectModule,
   ],
   providers: [
     AuthService,

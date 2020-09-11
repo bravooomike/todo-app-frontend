@@ -13,23 +13,25 @@
         <input formControlName="content" matInput placeholder="Szczegóły zadania">
       </mat-form-field>
 
-      <mat-form-field class="d-block">
+      <!-- <mat-form-field class="d-block">
         <mat-label>Typ zadania*</mat-label>
         <mat-select formControlName="taskType" [(ngModel)]="taskForm.get('taskType').code">
           <mat-option *ngFor="let taskType of taskTypes" [value]="taskType.code">{{taskType.name}}
           </mat-option>
         </mat-select>
         <mat-error>Należy wybrać treść zadania</mat-error>
-      </mat-form-field>
-      <!-- <app-task-type [formControlName]="taskForm.get('taskTypeCode')" [formGroup]="taskForm"></app-task-type> -->
+      </mat-form-field> -->
+      <app-task-type formControlName="taskType"></app-task-type>
 
-      <mat-form-field class="d-block">
+      <!-- <mat-form-field class="d-block">
         <mat-label>Status zadania*</mat-label>
         <mat-select formControlName="taskStatusCode" name="">
           <mat-option *ngFor="let taskStatus of taskStatuses" [value]="taskStatus.code">{{taskStatus.name}}</mat-option>
         </mat-select>
         <mat-error>Należy wybrać status zadania</mat-error>
-      </mat-form-field>
+      </mat-form-field> -->
+
+      <app-task-status formControlName="taskStatus"></app-task-status>
 
       <mat-form-field class="d-block">
         <input matInput [ngxMatDatetimePicker]="pickercreatedDate" placeholder="Data dodania zadania"

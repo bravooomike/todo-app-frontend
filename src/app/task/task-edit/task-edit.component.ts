@@ -47,7 +47,7 @@ export class TaskEditComponent implements OnInit {
       summary: [this.task.summary, [Validators.required]],
       content: [this.task.content, [Validators.required]],
       taskType: [this.task.taskType, [Validators.required]],
-      taskStatusCode: [this.task.taskStatusCode, [Validators.required]],
+      taskStatus: [this.task.taskStatus, [Validators.required]],
       createdDate: [this.task.createdDate, [Validators.required]],
       expiredDate: [this.task.expiredDate, [Validators.required]],
       // endedDate: [this.task.endedDate, [Validators.required]],
