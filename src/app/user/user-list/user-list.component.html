@@ -1,0 +1,29 @@
+<div class="table-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th *ngFor="let header of displayedHeaders"> {{header}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.userRole | userRoleFormatter}}</td>
+        <td>{{user.active === true ? 'Aktywny' : 'Nieaktywny'}}</td>
+        <td>
+          <button (click)="goToEdit(user.id)">
+            <fa-icon [icon]="faEdit"></fa-icon>
+          </button>
+          <!-- <button>
+            <fa-icon [icon]="faCommentSlash"></fa-icon>
+          </button> -->
+          <!-- <button (click)="deleteTask(task.id)">
+            <fa-icon [icon]="faTrashAlt"></fa-icon>
+          </button> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TaskAddComponent } from "./task-add/task-add.component";
 import { TaskTypeComponent } from "./task-type/task-type.component";
 import { TaskStatusComponent } from "./task-status/task-status.component";
+// import { CountdownComponent } from "../shared/countdown/countdown.component";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { TaskStatusComponent } from "./task-status/task-status.component";
     SharedModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
+    // CountdownComponent,
   ],
   exports: [
     TaskComponent,

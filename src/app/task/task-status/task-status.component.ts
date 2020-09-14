@@ -38,7 +38,6 @@ export class TaskStatusComponent implements OnInit {
   public getAll() {
     this.taskStatusService.getAll().subscribe((taskStatuses) => {
       this.taskStatuses = taskStatuses;
-      console.log(this.taskStatuses);
     });
   }
 

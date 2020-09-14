@@ -32,8 +32,8 @@ export class TaskAddComponent implements OnInit {
     return this.formBuider.group({
       summary: ["", [Validators.required]],
       content: ["", [Validators.required]],
-      taskTypeCode: ["", [Validators.required]],
-      taskStatusCode: ["", [Validators.required]],
+      taskType: ["", [Validators.required]],
+      taskStatus: ["", [Validators.required]],
       createdDate: ["", [Validators.required]],
       expiredDate: ["", [Validators.required]],
     });

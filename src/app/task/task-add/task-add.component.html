@@ -1,7 +1,6 @@
 <div class="section-container">
   <div class="content d-flex flex-column">
     <p class="h1 mb-4 text-center">Dodaj zadanie</p>
-    <!-- <form [formGroup]="taskForm" class="d-flex flex-column"> -->
     <form [formGroup]="taskForm">
 
       <mat-form-field class="d-block">
@@ -12,27 +11,8 @@
       <mat-form-field class="d-block">
         <input formControlName="content" matInput placeholder="Szczegóły zadania">
       </mat-form-field>
-
-      <mat-form-field class="d-block">
-        <mat-label>Typ zadania*</mat-label>
-        <mat-select formControlName="taskTypeCode" name="">
-          <mat-option value="zak">Zakupy</mat-option>
-          <mat-option value="szk">Szkoła</mat-option>
-          <mat-option value="pra">Praca</mat-option>
-          <mat-option value="inn">Inne</mat-option>
-        </mat-select>
-        <mat-error>Należy wybrać treść zadania</mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="d-block">
-        <mat-label>Status zadania*</mat-label>
-        <mat-select formControlName="taskStatusCode" name="">
-          <mat-option value="zap">Zaplanowane</mat-option>
-          <mat-option value="wtr">W trakcie</mat-option>
-          <mat-option value="zak">Zakończone</mat-option>
-        </mat-select>
-        <mat-error>Należy wybrać status zadania</mat-error>
-      </mat-form-field>
+      <app-task-type formControlName="taskType"></app-task-type>
+      <app-task-status formControlName="taskStatus"></app-task-status>
 
       <mat-form-field class="d-block">
         <input matInput [ngxMatDatetimePicker]="pickercreatedDate" placeholder="Data dodania zadania"

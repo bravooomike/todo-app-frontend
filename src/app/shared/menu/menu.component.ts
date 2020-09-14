@@ -4,7 +4,7 @@ import {
   faListAlt,
   faPlusSquare,
   faCog,
-  faUserCog,
+  faUsers,
   // faTools,
 } from "@fortawesome/free-solid-svg-icons";
 import { Router } from "@angular/router";
@@ -19,7 +19,7 @@ export class MenuComponent implements OnInit {
   faListAlt = faListAlt;
   faPlusSquare = faPlusSquare;
   faCog = faCog;
-  faUserCog = faUserCog;
+  faUsers = faUsers;
   // faTools = faTools;
 
   constructor(
@@ -30,7 +30,11 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {}
 
-  public gotoAddTask() {
-    this.router.navigateByUrl("/add");
+  public add() {
+    if (this.router.url === "/task") {
+      this.router.navigateByUrl("/taskAdd");
+    } else if (this.router.url === "/user") {
+      this.router.navigateByUrl("/userAdd");
+    }
   }
 }

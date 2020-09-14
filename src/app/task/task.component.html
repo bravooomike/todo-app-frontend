@@ -13,6 +13,7 @@
         <td>{{task.taskStatus.name}}</td>
         <td>{{task.createdDate | dateFormatter}}</td>
         <td>{{task.expiredDate | dateFormatter}}</td>
+        <td>ok</td>
         <td>{{task.endedDate | dateFormatter}}</td>
         <td>
           <button (click)="goToEdit(task.id)">
@@ -28,4 +29,5 @@
       </tr>
     </tbody>
   </table>
+  <!-- <countdown #cd [config]="config" (event)="handleEvent($event)"></countdown> -->
 </div>

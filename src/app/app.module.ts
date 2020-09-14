@@ -1,3 +1,4 @@
+import { UserModule } from "./user/user.module";
 import { TaskModule } from "./task/task.module";
 import { InfoPageModule } from "./info-page/info-page.module";
 import { SharedModule } from "./shared/shared.module";
@@ -24,6 +25,7 @@ import {
   NgxMatNativeDateModule,
 } from "@angular-material-components/datetime-picker";
 import { NgSelectModule } from "@ng-select/ng-select";
+import { CountdownModule } from "ngx-countdown";
 
 @NgModule({
   declarations: [AppComponent],
@@ -45,6 +47,8 @@ import { NgSelectModule } from "@ng-select/ng-select";
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
     NgSelectModule,
+    CountdownModule,
+    UserModule,
   ],
   providers: [
     AuthService,

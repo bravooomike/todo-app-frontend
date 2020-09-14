@@ -9,7 +9,8 @@ import { MaterialModule } from "../material/material.module";
 import { DateFormatterPipe } from "./pipes/date-formatter.pipe";
 import { PageTitleComponent } from "./page-title/page-title.component";
 import { MenuComponent } from "./menu/menu.component";
-import { TaskTypePipe } from "./pipes/task-type.pipe";
+import { CountdownComponent } from "./countdown/countdown.component";
+import { UserRoleFormatterPipe } from "./pipes/user-role-formatter.pipe";
 
 @NgModule({
   declarations: [
@@ -17,15 +18,17 @@ import { TaskTypePipe } from "./pipes/task-type.pipe";
     DateFormatterPipe,
     PageTitleComponent,
     MenuComponent,
-    TaskTypePipe,
+    CountdownComponent,
+    UserRoleFormatterPipe,
   ],
   imports: [CommonModule, RouterModule, MaterialModule, FontAwesomeModule],
   exports: [
     HeaderComponent,
     DateFormatterPipe,
+    UserRoleFormatterPipe,
     PageTitleComponent,
     MenuComponent,
-    TaskTypePipe,
+    CountdownComponent,
   ],
   providers: [AuthService, PageTitleSharedService],
 })

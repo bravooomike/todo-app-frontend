@@ -1,3 +1,6 @@
+import { UserAddComponent } from "./user/user-add/user-add.component";
+import { UserEditComponent } from "./user/user-edit/user-edit.component";
+import { UserListComponent } from "./user/user-list/user-list.component";
 import { TaskResolveService } from "./task/task-resolve.service";
 import { TaskEditComponent } from "./task/task-edit/task-edit.component";
 import { TaskComponent } from "./task/task.component";
@@ -35,8 +38,20 @@ const APP_ROUTES: Route[] = [
         resolve: { task: TaskResolveService },
       },
       {
-        path: "add",
+        path: "taskAdd",
         component: TaskAddComponent,
+      },
+      {
+        path: "user",
+        component: UserListComponent,
+      },
+      {
+        path: "user/:id",
+        component: UserEditComponent,
+      },
+      {
+        path: "userAdd",
+        component: UserAddComponent,
       },
     ],
   },
