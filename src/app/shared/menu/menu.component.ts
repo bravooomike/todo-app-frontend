@@ -30,11 +30,11 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {}
 
-  public add() {
-    if (this.router.url === "/task") {
-      this.router.navigateByUrl("/taskAdd");
-    } else if (this.router.url === "/user") {
-      this.router.navigateByUrl("/userAdd");
-    }
-  }
+  // public add() {
+  //   if (this.router.url === "/task") {
+  //     this.router.navigateByUrl("/taskAdd");
+  //   } else if (this.router.url === "/user") {
+  //     this.router.navigateByUrl("/userAdd");
+  //   }
+  // }
 }

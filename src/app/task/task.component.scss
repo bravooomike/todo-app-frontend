@@ -1,3 +1,25 @@
+.icons-container {
+  margin: -0.3rem 2rem;
+
+  button {
+    border: none;
+    font-size: 3rem;
+    cursor: pointer;
+    background-color: transparent;
+
+    fa-icon {
+      // padding: 0;
+      transition: all 400ms;
+
+      &:hover {
+        color: #3F51B5;
+        text-shadow: 2px 2px 4px #000000;
+      }
+
+    }
+  }
+}
+
 .table-container {
   margin: 1rem 2rem 0;
 

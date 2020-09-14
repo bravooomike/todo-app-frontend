@@ -7,6 +7,7 @@ import {
   faEdit,
   faCommentSlash,
   faTrashAlt,
+  faPlusSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { CountdownComponent } from "ngx-countdown";
 
@@ -32,6 +33,7 @@ export class TaskComponent implements OnInit {
   public faEdit = faEdit;
   public faCommentSlash = faCommentSlash;
   public faTrashAlt = faTrashAlt;
+  public faPlusSquare = faPlusSquare;
 
   // public countdown = "";
   // public countdown = (expiredDate) => {
@@ -108,6 +110,10 @@ export class TaskComponent implements OnInit {
     this.taskService.deleteTask(id).subscribe(() => {
       this.getAll();
     });
+  }
+
+  public goToAddTask() {
+    this.router.navigateByUrl("/taskAdd");
   }
 
   // public calculate(expiredDate) {

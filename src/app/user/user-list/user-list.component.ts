@@ -3,11 +3,7 @@ import { PageTitleSharedService } from "src/app/shared/services/page-title-share
 import { UserService } from "./../user.service";
 import { Component, OnInit } from "@angular/core";
 import { User } from "../user.model";
-import {
-  faEdit,
-  faCommentSlash,
-  faTrashAlt,
-} from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "app-user-list",
@@ -26,8 +22,7 @@ export class UserListComponent implements OnInit {
     "Akcje",
   ];
   public faEdit = faEdit;
-  public faCommentSlash = faCommentSlash;
-  public faTrashAlt = faTrashAlt;
+  public faPlusSquare = faPlusSquare;
 
   constructor(
     private userService: UserService,
@@ -50,5 +45,9 @@ export class UserListComponent implements OnInit {
   public goToEdit(id: number) {
     console.log(id);
     this.router.navigate(["user", id]);
+  }
+
+  public goToAddUser() {
+    this.router.navigateByUrl("/userAdd");
   }
 }
