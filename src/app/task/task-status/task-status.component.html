@@ -1,5 +1,7 @@
 <mat-form-field class="d-block">
   <mat-label>Status zadania*</mat-label>
+  <!-- <mat-select [formControl]="taskTypeForm" (selectionChange)="onSelect($event)" [(ngModel)]="taskStatus"
+  (ngModelChange)="emitTaskStatus()"> -->
   <mat-select [formControl]="taskTypeForm" (selectionChange)="onSelect($event)">
     <mat-option *ngFor="let taskStatus of taskStatuses" [value]="taskStatus.id">{{taskStatus.name}}
     </mat-option>

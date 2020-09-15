@@ -8,6 +8,9 @@ import {
   faCommentSlash,
   faTrashAlt,
   faPlusSquare,
+  faHourglassStart,
+  faHourglassHalf,
+  faHourglassEnd,
 } from "@fortawesome/free-solid-svg-icons";
 import { CountdownComponent } from "ngx-countdown";
 
@@ -18,22 +21,28 @@ import { CountdownComponent } from "ngx-countdown";
 })
 export class TaskComponent implements OnInit {
   public tasks: Task[] = [];
+  public filteredTasks: Task[] = [];
   public title: string = "Lista zadań";
-  public displayedHeaders = [
-    "Zadanie",
-    "Szczegóły",
-    "Typ zadania",
-    "Status zadania",
-    "Data dodania",
-    "Do kiedy?",
-    "Pozostało",
-    "Data zakończenia",
-    "Akcje",
+  public settings = [
+    { displayedName: "#", name: "null" },
+    { displayedName: "Zadanie", name: "summary" },
+    { displayedName: "Szczegóły", name: "content" },
+    { displayedName: "Typ zadania", name: "taskType" },
+    { displayedName: "Status zadania", name: "taskStatus" },
+    { displayedName: "Data dodania", name: "createdDate" },
+    { displayedName: "Do kiedy?", name: "null" },
+    { displayedName: "Pozostało", name: "expiredDate" },
+    { displayedName: "Data zakończenia", name: "endedDate" },
+    { displayedName: "Akcje", name: "null" },
   ];
   public faEdit = faEdit;
   public faCommentSlash = faCommentSlash;
   public faTrashAlt = faTrashAlt;
   public faPlusSquare = faPlusSquare;
+  public faHourglassStart = faHourglassStart;
+  public faHourglassHalf = faHourglassHalf;
+  public faHourglassEnd = faHourglassEnd;
+  public isSorted: boolean = false;
 
   // public countdown = "";
   // public countdown = (expiredDate) => {
@@ -99,6 +108,8 @@ export class TaskComponent implements OnInit {
   public getAll() {
     this.taskService.getAll().subscribe((tasks) => {
       this.tasks = tasks;
+      this.onFilterChanged(null);
+      this.onCheckedChange(false);
     });
   }
 
@@ -114,6 +125,95 @@ export class TaskComponent implements OnInit {
 
   public goToAddTask() {
     this.router.navigateByUrl("/taskAdd");
+  }
+
+  public onFilterChanged(value: string) {
+    if (!value || value === "") {
+      this.filteredTasks = this.tasks;
+    } else {
+      this.filteredTasks = this.tasks.filter((task) => {
+        const textToFilter =
+          task.id +
+          task.summary +
+          task.content +
+          task.taskType.name +
+          task.taskStatus.name +
+          task.createdDate +
+          task.expiredDate +
+          task.endedDate;
+        return textToFilter.toLowerCase().search(value.toLowerCase()) !== -1;
+      });
+    }
+  }
+
+  public onCheckedChange(value: boolean) {
+    if (value) {
+      this.filteredTasks = this.tasks;
+    } else {
+      this.filteredTasks = this.tasks.filter((el) => {
+        return el.taskStatus.name !== "zakonczone";
+      });
+    }
+  }
+
+  public today() {
+    const d =
+      new Date().getDate() > 9
+        ? new Date().getDate()
+        : `0${new Date().getDate()}`;
+    const m =
+      new Date().getMonth() > 9
+        ? new Date().getMonth()
+        : `0${new Date().getMonth() + 1}`;
+    const y = new Date().getFullYear();
+
+    return `${d}.${m}.${y}`;
+  }
+
+  public sortItems(e) {
+    // this.filteredTasks = this.tasks.sort((a, b) => {
+    this.filteredTasks.sort((a, b) => {
+      // console.log("a", a[e.target.id]);
+      // console.log("a", a);
+      // console.log("b", b[e.target.id]);
+      // console.log("b", b);
+      // const name = e.target.id;
+      // console.log(name);
+      // const x = this.getValue(a[name]);
+      const x = this.getValue(a[e.target]);
+      // const y = this.getValue(b[name]);
+      const y = this.getValue(b[e.target]);
+
+      console.log(x);
+      console.log(y);
+
+      if (!this.isSorted) {
+        if (x < y) {
+          return -1;
+        }
+        if (x > y) {
+          return 1;
+        }
+        return 0;
+      } else {
+        if (x > y) {
+          return -1;
+        }
+        if (x < y) {
+          return 1;
+        }
+        return 0;
+      }
+    });
+    this.isSorted = !this.isSorted;
+  }
+
+  private getValue(value: string | number): string | number {
+    if (typeof value === "string") {
+      return value.toLowerCase();
+    } else {
+      return value;
+    }
   }
 
   // public calculate(expiredDate) {

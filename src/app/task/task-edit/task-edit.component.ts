@@ -40,16 +40,17 @@ export class TaskEditComponent implements OnInit {
         createdDate: [this.task.createdDate, [Validators.required]],
         expiredDate: [this.task.expiredDate, [Validators.required]],
       });
-    } else {
-      return this.formBuider.group({
-        summary: ["", [Validators.required]],
-        content: ["", [Validators.required]],
-        taskType: ["", [Validators.required]],
-        taskStatus: ["", [Validators.required]],
-        createdDate: ["", [Validators.required]],
-        expiredDate: ["", [Validators.required]],
-      });
     }
+    //  else {
+    //   return this.formBuider.group({
+    //     summary: ["", [Validators.required]],
+    //     content: ["", [Validators.required]],
+    //     taskType: ["", [Validators.required]],
+    //     taskStatus: ["", [Validators.required]],
+    //     createdDate: ["", [Validators.required]],
+    //     expiredDate: ["", [Validators.required]],
+    //   });
+    // }
   }
 
   public getOne() {

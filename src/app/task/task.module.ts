@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TaskAddComponent } from "./task-add/task-add.component";
 import { TaskTypeComponent } from "./task-type/task-type.component";
 import { TaskStatusComponent } from "./task-status/task-status.component";
+import { TaskFilterComponent } from "./task-filter/task-filter.component";
 // import { CountdownComponent } from "../shared/countdown/countdown.component";
 
 @NgModule({
@@ -22,6 +23,7 @@ import { TaskStatusComponent } from "./task-status/task-status.component";
     TaskAddComponent,
     TaskTypeComponent,
     TaskStatusComponent,
+    TaskFilterComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +42,7 @@ import { TaskStatusComponent } from "./task-status/task-status.component";
     TaskAddComponent,
     TaskTypeComponent,
     TaskStatusComponent,
+    TaskFilterComponent,
   ],
 })
 export class TaskModule {}

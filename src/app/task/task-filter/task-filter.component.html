@@ -1,0 +1,5 @@
+<div class="filter">
+  <input class="mr-4" [(ngModel)]="value" (ngModelChange)="emitChange()" placeholder="Filtruj..." />
+  <mat-checkbox [checked]="false" color="primary" [(ngModel)]="isChecked" (ngModelChange)="emitCheck()">Pokaż
+    wszystkie zadania</mat-checkbox>
+</div>

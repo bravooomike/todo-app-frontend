@@ -11,13 +11,16 @@ import {
 } from "@angular-material-components/datetime-picker";
 import { UserAddComponent } from "./user-add/user-add.component";
 import { UserEditComponent } from "./user-edit/user-edit.component";
+import { RouterModule } from "@angular/router";
+import { UserFilterComponent } from './user-filter/user-filter.component';
 
 @NgModule({
-  declarations: [UserListComponent, UserAddComponent, UserEditComponent],
+  declarations: [UserListComponent, UserAddComponent, UserEditComponent, UserFilterComponent],
   imports: [
     CommonModule,
     MaterialModule,
     FontAwesomeModule,
+    RouterModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,

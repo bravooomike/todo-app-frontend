@@ -1,1 +1,49 @@
-<p>user-edit works!</p>
+<div class="section-container">
+  <div class="content d-flex flex-column">
+    <p class="h1 mb-4 text-center">Edytuj użytkownika</p>
+    <form [formGroup]="userForm">
+
+      <mat-form-field class="d-block">
+        <input formControlName="firstName" matInput placeholder="Imię" required>
+        <mat-error>Podanie imienia jest wymagane</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="d-block">
+        <input formControlName="lastName" matInput placeholder="Nazwisko" required>
+        <mat-error>Podanie nazwiska jest wymagane</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="d-block">
+        <input formControlName="email" matInput placeholder="Email" required>
+        <mat-error>Podanie adresu email jest wymagane</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="d-block">
+        <input formControlName="password" matInput placeholder="Hasło" required>
+        <mat-error>Podanie adresu email jest wymagane</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="d-block">
+        <mat-label>Rola użytkownika</mat-label>
+        <mat-select formControlName="userRole">
+          <mat-option [value]="'ADMIN'">Administrator</mat-option>
+          <mat-option [value]="'USER'">Użytkownik</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="d-block">
+        <mat-label>Użytkownik aktywny</mat-label>
+        <mat-select formControlName="active">
+          <mat-option [value]="true">Aktywny</mat-option>
+          <mat-option [value]="false">Nieaktywny</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button (click)="editUser()" class="float-right" mat-raised-button color="primary">Zapisz</button>
+      <button (click)="back()" class="float-right" mat-stroked-button color="primary">Wróć</button>
+
+    </form>
+
+  </div>
+</div>
+<!-- <pre>{{userForm.value | json}}</pre> -->

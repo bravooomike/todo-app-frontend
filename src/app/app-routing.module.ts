@@ -1,3 +1,4 @@
+import { UserResolveService } from "./user/user-resolve.service";
 import { UserAddComponent } from "./user/user-add/user-add.component";
 import { UserEditComponent } from "./user/user-edit/user-edit.component";
 import { UserListComponent } from "./user/user-list/user-list.component";
@@ -48,11 +49,17 @@ const APP_ROUTES: Route[] = [
       {
         path: "user/:id",
         component: UserEditComponent,
+        resolve: { user: UserResolveService },
       },
       {
         path: "userAdd",
         component: UserAddComponent,
       },
+      // {
+      //   path: "userEdit",
+      //   component: UserEditComponent,
+      //   // resolve: { user: UserResolveService },
+      // },
     ],
   },
   // {path='/*', }

@@ -12,6 +12,7 @@ import { faEdit, faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 })
 export class UserListComponent implements OnInit {
   public users: User[] = [];
+  public filteredUsers: User[] = [];
   public title: string = "Lista użytkowników";
   public displayedHeaders = [
     "Imię",
@@ -38,16 +39,39 @@ export class UserListComponent implements OnInit {
   public getAll() {
     this.userService.getAll().subscribe((users) => {
       this.users = users;
-      // console.log(this.users);
+      this.onFilterChanged(null);
+      this.onCheckedChange(false);
     });
   }
 
   public goToEdit(id: number) {
-    console.log(id);
-    this.router.navigate(["user", id]);
+    this.router.navigate(["/user", id]);
   }
 
-  public goToAddUser() {
-    this.router.navigateByUrl("/userAdd");
+  public onFilterChanged(value: string) {
+    if (!value || value === "") {
+      this.filteredUsers = this.users;
+    } else {
+      this.filteredUsers = this.users.filter((task) => {
+        const textToFilter =
+          task.id +
+          task.firstName +
+          task.lastName +
+          task.email +
+          task.userRole +
+          task.active;
+        return textToFilter.toLowerCase().search(value.toLowerCase()) !== -1;
+      });
+    }
+  }
+
+  public onCheckedChange(value: boolean) {
+    if (value) {
+      this.filteredUsers = this.users;
+    } else {
+      this.filteredUsers = this.users.filter((el) => {
+        return el.active !== false;
+      });
+    }
   }
 }

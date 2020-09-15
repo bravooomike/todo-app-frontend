@@ -1,0 +1,5 @@
+<div class="filter">
+  <input type="text" class="mr-4" [(ngModel)]="value" (ngModelChange)="emitChange()" placeholder="Filtruj..." />
+  <mat-checkbox [checked]="false" color="primary" [(ngModel)]="isChecked" (ngModelChange)="emitCheck()">Pokaż
+    wszystkich użytkowników</mat-checkbox>
+</div>

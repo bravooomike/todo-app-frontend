@@ -1,8 +1,15 @@
-<div class="icons-container">
-  <button (click)="goToAddUser()">
-    <fa-icon [icon]="faPlusSquare"></fa-icon>
-  </button>
+<div class="bar-container d-flex align-items-center">
+  <div class="bar-container-section btn-add">
+    <button [routerLink]="['/userAdd']">
+      <fa-icon [icon]="faPlusSquare"></fa-icon>
+    </button>
+  </div>
+  <div class="bar-container-section">
+    <app-user-filter (changedValue)="onFilterChanged($event)" (checkedValue)="onCheckedChange($event)">
+    </app-user-filter>
+  </div>
 </div>
+
 <div class="table-container">
   <table class="table">
     <thead>
@@ -11,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users">
+      <tr *ngFor="let user of filteredUsers">
         <td>{{user.firstName}}</td>
         <td>{{user.lastName}}</td>
         <td>{{user.email}}</td>
@@ -21,12 +28,6 @@
           <button (click)="goToEdit(user.id)">
             <fa-icon [icon]="faEdit"></fa-icon>
           </button>
-          <!-- <button>
-            <fa-icon [icon]="faCommentSlash"></fa-icon>
-          </button> -->
-          <!-- <button (click)="deleteTask(task.id)">
-            <fa-icon [icon]="faTrashAlt"></fa-icon>
-          </button> -->
         </td>
       </tr>
     </tbody>
