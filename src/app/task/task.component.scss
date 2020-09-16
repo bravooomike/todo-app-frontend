@@ -34,9 +34,10 @@
 
   table {
     width: 100%;
+    font-size: 1.4rem;
 
     .task-status-done {
-      font-size: 2rem;
+      font-size: 1.8rem;
     }
 
     button {
@@ -45,7 +46,7 @@
       margin: 0 5px;
 
       fa-icon {
-        font-size: 2rem;
+        font-size: 1.8rem;
         padding-left: 1rem;
         transition: all 400ms;
         cursor: pointer;

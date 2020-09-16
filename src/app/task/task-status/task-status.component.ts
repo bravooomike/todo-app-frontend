@@ -1,19 +1,7 @@
 import { TaskStatusService } from "./task-status.service";
-import {
-  Component,
-  OnInit,
-  forwardRef,
-  Output,
-  EventEmitter,
-} from "@angular/core";
+import { Component, OnInit, forwardRef } from "@angular/core";
 import { TaskStatus } from "./task-status.model";
-import {
-  ControlValueAccessor,
-  FormControl,
-  FormControlName,
-  FormGroup,
-  NG_VALUE_ACCESSOR,
-} from "@angular/forms";
+import { FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { MatSelectChange } from "@angular/material";
 
 @Component({
@@ -33,9 +21,6 @@ export class TaskStatusComponent implements OnInit {
   public selectedId: number;
   public taskTypeForm: FormControl = new FormControl();
   public taskStatus: string = "";
-
-  // @Output()
-  // public changedTaskStatus: EventEmitter<string> = new EventEmitter<string>();
 
   propagateChange = (_: any) => {};
 
@@ -60,19 +45,12 @@ export class TaskStatusComponent implements OnInit {
   writeValue(obj: any): void {
     this.selectedId = obj.id;
     this.taskTypeForm.setValue(this.selectedId);
-    console.log(this.selectedId);
   }
 
   onSelect($event: MatSelectChange) {
     this.selectedId = $event.value;
-    // console.log(this.selectedId);
     this.propagateChange(
       this.taskStatuses.find((el) => el.id === this.selectedId)
     );
   }
-
-  // public emitTaskStatus(): void {
-  //   console.log(this.taskStatus);
-  //   this.changedTaskStatus.emit(this.taskStatus);
-  // }
 }

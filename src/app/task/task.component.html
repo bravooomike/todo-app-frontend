@@ -13,7 +13,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th *ngFor="let header of settings" [id]="header.name" (click)="sortItems($event)"> {{header.displayedName}}
+        <th *ngFor="let elem of settings" [id]="elem.name" (click)="sortItems($event)"> {{elem.displayedName}}
         </th>
       </tr>
     </thead>
@@ -31,8 +31,11 @@
         <td>{{task.taskStatus.name}}</td>
         <td>{{task.createdDate | date: 'dd.LL.yyyy'}}</td>
         <td>{{task.expiredDate | date: 'dd.LL.yyyy'}}</td>
-        <td>ok</td>
-        <td>{{(task.taskStatus.name === 'zakonczone') ? today() : task.endedDate | date: 'dd.LL.yyyy'}}</td>
+        <td>
+          <app-countdown [endDate]="task.expiredDate" [taskStatus]="task.taskStatus.name"></app-countdown>
+        </td>
+        <!-- <td>{{(task.taskStatus.name === 'zakonczone') ? today() : task.endedDate | date: 'dd.LL.yyyy'}}</td> -->
+        <td>{{task.endedDate | date: 'dd.LL.yyyy'}}</td>
         <td class="d-flex flex-nowrap">
           <button (click)="goToEdit(task.id)">
             <fa-icon [icon]="faEdit"></fa-icon>
