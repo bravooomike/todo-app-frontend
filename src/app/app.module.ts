@@ -1,3 +1,4 @@
+import { RemainingTimeSharedService } from "./shared/services/remaining-time-shared.service";
 import { UserService } from "./user/user.service";
 import { UserModule } from "./user/user.module";
 import { TaskModule } from "./task/task.module";
@@ -58,6 +59,7 @@ import { CountdownModule } from "ngx-countdown";
     TaskService,
     UserService,
     PageTitleSharedService,
+    RemainingTimeSharedService,
   ],
   bootstrap: [AppComponent],
 })

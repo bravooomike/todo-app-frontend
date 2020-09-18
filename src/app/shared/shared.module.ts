@@ -1,3 +1,4 @@
+import { RemainingTimeSharedService } from "./services/remaining-time-shared.service";
 import { PageTitleSharedService } from "./services/page-title-shared.service";
 import { AuthService } from "./../login/auth.service";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
@@ -11,6 +12,8 @@ import { PageTitleComponent } from "./page-title/page-title.component";
 import { MenuComponent } from "./menu/menu.component";
 import { CountdownComponent } from "./countdown/countdown.component";
 import { UserRoleFormatterPipe } from "./pipes/user-role-formatter.pipe";
+import { TimeExceededCounterComponent } from "./time-exceeded-counter/time-exceeded-counter.component";
+import { TimeIconsComponent } from "./time-icons/time-icons.component";
 
 @NgModule({
   declarations: [
@@ -20,6 +23,8 @@ import { UserRoleFormatterPipe } from "./pipes/user-role-formatter.pipe";
     MenuComponent,
     CountdownComponent,
     UserRoleFormatterPipe,
+    TimeExceededCounterComponent,
+    TimeIconsComponent,
   ],
   imports: [CommonModule, RouterModule, MaterialModule, FontAwesomeModule],
   exports: [
@@ -29,7 +34,9 @@ import { UserRoleFormatterPipe } from "./pipes/user-role-formatter.pipe";
     PageTitleComponent,
     MenuComponent,
     CountdownComponent,
+    TimeExceededCounterComponent,
+    TimeIconsComponent,
   ],
-  providers: [AuthService, PageTitleSharedService],
+  providers: [AuthService, PageTitleSharedService, RemainingTimeSharedService],
 })
 export class SharedModule {}

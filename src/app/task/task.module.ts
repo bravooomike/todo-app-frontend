@@ -14,7 +14,7 @@ import { TaskAddComponent } from "./task-add/task-add.component";
 import { TaskTypeComponent } from "./task-type/task-type.component";
 import { TaskStatusComponent } from "./task-status/task-status.component";
 import { TaskFilterComponent } from "./task-filter/task-filter.component";
-import { TaskDetailsComponent } from './task-details/task-details.component';
+import { TaskDetailsComponent } from "./task-details/task-details.component";
 // import { CountdownComponent } from "../shared/countdown/countdown.component";
 
 @NgModule({
@@ -45,6 +45,7 @@ import { TaskDetailsComponent } from './task-details/task-details.component';
     TaskTypeComponent,
     TaskStatusComponent,
     TaskFilterComponent,
+    TaskDetailsComponent,
   ],
 })
 export class TaskModule {}

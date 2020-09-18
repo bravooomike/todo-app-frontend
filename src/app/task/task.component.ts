@@ -1,7 +1,7 @@
 import { PageTitleSharedService } from "./../shared/services/page-title-shared.service";
 import { Router } from "@angular/router";
 import { TaskService } from "./task.service";
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, OnDestroy } from "@angular/core";
 import { Task } from "./task.model";
 import {
   faEdit,
@@ -11,8 +11,8 @@ import {
   faHourglassStart,
   faHourglassHalf,
   faHourglassEnd,
+  faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
-import { CountdownComponent } from "ngx-countdown";
 
 @Component({
   selector: "app-task",
@@ -31,7 +31,8 @@ export class TaskComponent implements OnInit {
     { displayedName: "Status zadania", name: "taskStatus.name" },
     { displayedName: "Data dodania", name: "createdDate" },
     { displayedName: "Do kiedy?", name: "null" },
-    { displayedName: "Pozostało", name: "expiredDate" },
+    { displayedName: "Pozostało", name: "null" },
+    { displayedName: "Przekroczenie", name: "null" },
     { displayedName: "Data zakończenia", name: "endedDate" },
     { displayedName: "Akcje", name: "null" },
   ];
@@ -42,57 +43,12 @@ export class TaskComponent implements OnInit {
   public faHourglassStart = faHourglassStart;
   public faHourglassHalf = faHourglassHalf;
   public faHourglassEnd = faHourglassEnd;
+  public faInfoCircle = faInfoCircle;
+
   public isSorted: boolean = false;
-
-  // public countdown = "";
-  // public countdown = (expiredDate) => {
-  //   const interval = setInterval(() => {
-  //     const now = new Date().getTime();
-  //     const distance = expiredDate - now;
-  //     const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-  //     const h = Math.floor(
-  //       (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  //     );
-  //     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  //     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  //     const m = minutes > 9 ? minutes : `0${minutes}`;
-  //     const s = seconds > 9 ? seconds : `0${seconds}`;
-
-  //     // this.countdown = `${d}d ${h}h ${m}m ${s}s`;
-
-  //     if (distance < 0) {
-  //       clearInterval(interval);
-  //       return "Po czasie";
-  //     } else {
-  //       return `${d}d ${h}h ${m}m ${s}s`;
-  //     }
-  //   }, 1000);
-  // };
-  // public countdown = setInterval((expiredDate) => {
-  //   const now = new Date().getTime();
-  //   const distance = expiredDate - now;
-  //   const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-  //   const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  //   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  //   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  //   const m = minutes > 9 ? minutes : `0${minutes}`;
-  //   const s = seconds > 9 ? seconds : `0${seconds}`;
-
-  //   // this.countdown = `${d}d ${h}h ${m}m ${s}s`;
-
-  //   if (distance < 0) {
-  //     clearInterval(this.countdown);
-  //     return "Po czasie";
-  //   } else {
-  //     return `${d}d ${h}h ${m}m ${s}s`;
-  //   }
-  // }, 1000);
-
-  // public countDown = setInterval(expiredDate => {
-  //   console.log("ok");
-  // }, 1000);
+  public isDetailsActive: boolean = false;
+  public taskDetails: Task;
+  public remainingTime: number = null;
 
   constructor(
     private taskService: TaskService,
@@ -115,6 +71,7 @@ export class TaskComponent implements OnInit {
 
   public goToEdit(id: number) {
     this.router.navigate(["/task", id]);
+    this.isDetailsActive = false;
   }
 
   public deleteTask(id: number) {
@@ -160,7 +117,6 @@ export class TaskComponent implements OnInit {
     // this.filteredTasks = this.tasks.sort((a, b) => {
     this.filteredTasks.sort((a, b) => {
       const name = e.target.id;
-      // console.log(name);
       const x = this.getValue(a[name]);
       const y = this.getValue(b[name]);
 
@@ -194,5 +150,17 @@ export class TaskComponent implements OnInit {
     } else {
       return value;
     }
+  }
+
+  public activateTaskDetails(task) {
+    this.isDetailsActive = true;
+    this.taskDetails = task;
+    console.log(this.isDetailsActive);
+  }
+
+  public deactivateTaskDetails() {
+    this.isDetailsActive = false;
+    this.taskDetails = null;
+    console.log(this.isDetailsActive);
   }
 }
