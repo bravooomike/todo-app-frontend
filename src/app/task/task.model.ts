@@ -3,14 +3,14 @@ import { TaskStatus } from "./task-status/task-status.model";
 
 export class Task {
   id: number = null;
-  summary: string = null;
-  content: string = null;
-  taskType: TaskType = null;
-  taskStatus: TaskStatus = null;
-  createdDate: Date = null;
-  expiredDate: Date = null;
-  endedDate: Date = null;
-  userId: number = null;
+  summary: string;
+  content: string;
+  taskType: TaskType;
+  taskStatus: TaskStatus;
+  createdDate: Date;
+  expiredDate: Date;
+  endedDate: Date;
+  userId: number;
 
   constructor() {}
 

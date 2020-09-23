@@ -15,7 +15,13 @@ import { TaskTypeComponent } from "./task-type/task-type.component";
 import { TaskStatusComponent } from "./task-status/task-status.component";
 import { TaskFilterComponent } from "./task-filter/task-filter.component";
 import { TaskDetailsComponent } from "./task-details/task-details.component";
-// import { CountdownComponent } from "../shared/countdown/countdown.component";
+import { EndedTaskComponent } from "./ended-task/ended-task.component";
+import { TaskListComponent } from "./task-list/task-list.component";
+import { ToastService } from "../shared/services/toast.service";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserModule } from "@angular/platform-browser";
+import { ConfirmationComponent } from "../shared/confirmation/confirmation.component";
+import { NgxDatatableModule } from "@swimlane/ngx-datatable";
 
 @NgModule({
   declarations: [
@@ -26,6 +32,8 @@ import { TaskDetailsComponent } from "./task-details/task-details.component";
     TaskStatusComponent,
     TaskFilterComponent,
     TaskDetailsComponent,
+    EndedTaskComponent,
+    TaskListComponent,
   ],
   imports: [
     CommonModule,
@@ -36,7 +44,9 @@ import { TaskDetailsComponent } from "./task-details/task-details.component";
     SharedModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
-    // CountdownComponent,
+    BrowserModule,
+    BrowserAnimationsModule,
+    NgxDatatableModule,
   ],
   exports: [
     TaskComponent,
@@ -46,6 +56,9 @@ import { TaskDetailsComponent } from "./task-details/task-details.component";
     TaskStatusComponent,
     TaskFilterComponent,
     TaskDetailsComponent,
+    EndedTaskComponent,
+    TaskListComponent,
   ],
+  entryComponents: [ConfirmationComponent],
 })
 export class TaskModule {}

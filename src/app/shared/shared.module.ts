@@ -14,6 +14,7 @@ import { CountdownComponent } from "./countdown/countdown.component";
 import { UserRoleFormatterPipe } from "./pipes/user-role-formatter.pipe";
 import { TimeExceededCounterComponent } from "./time-exceeded-counter/time-exceeded-counter.component";
 import { TimeIconsComponent } from "./time-icons/time-icons.component";
+import { ConfirmationComponent } from "./confirmation/confirmation.component";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { TimeIconsComponent } from "./time-icons/time-icons.component";
     UserRoleFormatterPipe,
     TimeExceededCounterComponent,
     TimeIconsComponent,
+    ConfirmationComponent,
   ],
   imports: [CommonModule, RouterModule, MaterialModule, FontAwesomeModule],
   exports: [
@@ -36,7 +38,9 @@ import { TimeIconsComponent } from "./time-icons/time-icons.component";
     CountdownComponent,
     TimeExceededCounterComponent,
     TimeIconsComponent,
+    ConfirmationComponent,
   ],
   providers: [AuthService, PageTitleSharedService, RemainingTimeSharedService],
+  entryComponents: [ConfirmationComponent],
 })
 export class SharedModule {}

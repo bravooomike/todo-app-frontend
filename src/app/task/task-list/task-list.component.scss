@@ -1,0 +1,55 @@
+.table-container {
+  margin: 0 2rem 0;
+  position: relative;
+
+  .table-content {
+    // width: 100%;
+    // font-size: 1.4rem;
+    box-shadow: none;
+
+    .icons-column {
+      border: 1px solid red;
+      width: 20px;
+    }
+
+    .task-status-done {
+      font-size: 1.8rem;
+    }
+
+    .actions-column {
+      width: 450px;
+    }
+
+    .actions-icons {
+      // display: flex;
+    }
+
+    button {
+      background-color: transparent;
+      border: 0;
+      margin: 0 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      fa-icon {
+        font-size: 1.8rem;
+        padding-left: 1rem;
+        transition: all 400ms;
+        cursor: pointer;
+        display: block;
+
+        &:hover {
+          color: #3f51b5;
+          text-shadow: 2px 2px 4px #000000;
+        }
+      }
+    }
+  }
+}
+
+.task-ended {
+  text-decoration: line-through;
+  font-style: italic;
+  color: rgb(167, 167, 167);
+}

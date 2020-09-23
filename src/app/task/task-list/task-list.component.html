@@ -1,0 +1,153 @@
+<div class="table-container">
+  <ngx-datatable class="material table-content" [rows]="filteredTasks" [loadingIndicator]="loadingIndicator"
+    [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [reorderable]="reorderable" [columnMode]="ColumnMode.flex">
+
+    <ngx-datatable-column name="#" class="icons-column" [flexGrow]=1 draggable=false [sortable]=true>
+      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
+      </ng-template>
+      <ng-template let-task="row" ngx-datatable-cell-template>
+        <span class="task-status-done">
+          <app-time-icons [task]="task"></app-time-icons>
+        </span>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Zadanie" [flexGrow]=3>
+      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
+      </ng-template>
+      <ng-template let-task="row" ngx-datatable-cell-template>
+        <span [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{ task.summary }}</span>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Szczegóły" [flexGrow]=3>
+      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
+      </ng-template>
+      <ng-template let-task="row" ngx-datatable-cell-template>
+        <span [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{ task.content }}</span>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Typ zadania" [flexGrow]=2>
+      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
+      </ng-template>
+      <ng-template let-task="row" ngx-datatable-cell-template>
+        <span [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{ task.taskType.name }}</span>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Status zadania" [flexGrow]=2>
+      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
+      </ng-template>
+      <ng-template let-task="row" ngx-datatable-cell-template>
+        <span [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{ task.taskStatus.name }}</span>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Data dodania" [flexGrow]=2>
+      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
+      </ng-template>
+      <ng-template let-task="row" ngx-datatable-cell-template>
+        <span [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{task.createdDate | date: 'dd.LL.yyyy'}}</span>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Do kiedy?" [flexGrow]=2>
+      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
+      </ng-template>
+      <ng-template let-task="row" ngx-datatable-cell-template>
+        <span [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{task.expiredDate | date: 'dd.LL.yyyy'}}</span>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Przekroczenie" [flexGrow]=2>
+      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
+      </ng-template>
+      <ng-template let-task="row" ngx-datatable-cell-template>
+        <app-countdown *ngIf="task.taskStatus.name !== 'zakonczone'" [endDate]="task.expiredDate">
+        </app-countdown>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Data zakończenia" [flexGrow]=2>
+      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
+      </ng-template>
+      <ng-template let-task="row" ngx-datatable-cell-template>
+        <span [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{task.endedDate | date: 'dd.LL.yyyy'}}</span>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Akcje" class="actions-column" [flexGrow]=3>
+      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
+      </ng-template>
+      <ng-template let-task="row" ngx-datatable-cell-template>
+        <div class="d-flex flex-nowrap">
+          <button (click)="goToEdit(task.id)">
+            <fa-icon [icon]="faEdit"></fa-icon>
+          </button>
+          <button (click)="endTask(task)">
+            <fa-icon [icon]="faCommentSlash">
+            </fa-icon>
+          </button>
+          <app-ended-task #endedTaskRef></app-ended-task>
+          <button (click)="deleteTask(task)">
+            <fa-icon [icon]="faTrashAlt"></fa-icon>
+          </button>
+          <button (mouseenter)="activateTaskDetails(task)" (mouseleave)="deactivateTaskDetails()">
+            <fa-icon [icon]="faInfoCircle"></fa-icon>
+          </button>
+        </div>
+
+      </ng-template>
+    </ngx-datatable-column>
+
+  </ngx-datatable>
+  <app-task-details *ngIf="isDetailsActive" [task]="taskDetails"></app-task-details>
+</div>
+
+
+<!-- <div class="table-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th *ngFor="let elem of settings" [id]="elem.name" (click)="sortItems($event)"> {{elem.displayedName}}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of filteredTasks">
+        <td class="task-status-done d-flex justify-content-center align-items-center">
+          <app-time-icons [task]="task"></app-time-icons>
+        </td>
+        <td [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{task.summary}}</td>
+        <td [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{task.content}}</td>
+        <td [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{task.taskType.name}}</td>
+        <td [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{task.taskStatus.name}}</td>
+        <td [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{task.createdDate | date: 'dd.LL.yyyy'}}</td>
+        <td [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{task.expiredDate | date: 'dd.LL.yyyy'}}</td>
+        <td>
+          <app-countdown *ngIf="task.taskStatus.name !== 'zakonczone'" [endDate]="task.expiredDate">
+          </app-countdown>
+        </td>
+        <td [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{task.endedDate | date: 'dd.LL.yyyy'}}</td>
+        <td class="d-flex flex-nowrap">
+          <button (click)="goToEdit(task.id)">
+            <fa-icon [icon]="faEdit"></fa-icon>
+          </button>
+          <button (click)="endTask(task)">
+            <fa-icon [icon]="faCommentSlash">
+            </fa-icon>
+          </button>
+          <app-ended-task #endedTaskRef></app-ended-task>
+          <button (click)="deleteTask(task.id)">
+            <fa-icon [icon]="faTrashAlt"></fa-icon>
+          </button>
+          <button (mouseenter)="activateTaskDetails(task)" (mouseleave)="deactivateTaskDetails()">
+            <fa-icon [icon]="faInfoCircle"></fa-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <app-task-details *ngIf="isDetailsActive" [task]="taskDetails"></app-task-details>
+</div> -->

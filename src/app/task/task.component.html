@@ -5,68 +5,8 @@
     </button>
   </div>
   <div class="bar-container-section">
-    <app-task-filter (changedValue)="onFilterChanged($event)" (checkedValue)="onCheckedChange($event)">
+    <app-task-filter (changedValue)="filter($event)" (checkedValue)="showAll($event)">
     </app-task-filter>
   </div>
 </div>
-<div class="table-container">
-  <table class="table">
-    <thead>
-      <tr>
-        <th *ngFor="let elem of settings" [id]="elem.name" (click)="sortItems($event)"> {{elem.displayedName}}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let task of filteredTasks">
-        <td class="task-status-done d-flex justify-content-center align-items-center">
-          <!-- <fa-icon *ngIf="task.taskStatus.name === 'zaplanowane'" [icon]="faHourglassStart"></fa-icon>
-          <fa-icon *ngIf="task.taskStatus.name === 'w trakcie'" [icon]="faHourglassHalf"></fa-icon>
-          <fa-icon *ngIf="task.taskStatus.name === 'zakonczone'" [icon]="faHourglassEnd"></fa-icon> -->
-          <app-time-icons [task]="task"></app-time-icons>
-        </td>
-        <td>{{task.summary}}</td>
-        <td>{{task.content}}</td>
-        <td>{{task.taskType.name}}</td>
-        <td>{{task.taskStatus.name}}</td>
-        <td>{{task.createdDate | date: 'dd.LL.yyyy'}}</td>
-        <td>{{task.expiredDate | date: 'dd.LL.yyyy'}}</td>
-        <td>
-          <app-countdown *ngIf="task.taskStatus.name !== 'zakonczone'" [endDate]="task.expiredDate">
-          </app-countdown>
-        </td>
-        <td>
-          <app-time-exceeded-counter *ngIf="task.taskStatus.name !== 'zakonczone'" [endDate]="task.expiredDate">
-          </app-time-exceeded-counter>
-        </td>
-        <td>{{task.endedDate | date: 'dd.LL.yyyy'}}</td>
-        <td class="d-flex flex-nowrap">
-          <button (click)="goToEdit(task.id)">
-            <fa-icon [icon]="faEdit"></fa-icon>
-          </button>
-          <button>
-            <fa-icon [icon]="faCommentSlash"></fa-icon>
-          </button>
-          <button (click)="deleteTask(task.id)">
-            <fa-icon [icon]="faTrashAlt"></fa-icon>
-          </button>
-          <!-- <button (mouseenter)="activateTaskDetails($event, task)" (mouseleave)="activateTaskDetails($event)">
-            <fa-icon [icon]="faInfoCircle"></fa-icon>
-          </button> -->
-          <!-- <button (mouseenter)="activateTaskDetails($event, task)" (mouseleave)="deactivateTaskDetails($event)">
-            <fa-icon [icon]="faInfoCircle"></fa-icon>
-          </button> -->
-          <button (mouseenter)="activateTaskDetails(task)" (mouseleave)="deactivateTaskDetails()">
-            <fa-icon [icon]="faInfoCircle"></fa-icon>
-          </button>
-          <!-- <button>
-            <fa-icon [icon]="faInfoCircle" (mouseenter)="activateTaskDetails($event, task)"
-              (mouseleave)="deactivateTaskDetails($event)"></fa-icon>
-          </button> -->
-
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <app-task-details *ngIf="isDetailsActive" [task]="taskDetails"></app-task-details>
-</div>
+<app-task-list #taskListRef></app-task-list>

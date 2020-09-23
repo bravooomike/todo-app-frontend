@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>
+  <span><fa-icon class="icon-warning" [icon]="faExclamationTriangle"></fa-icon></span>
+  <span>Wymagane potwierdzenie operacji</span>
+</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content>
+  <p class="my-5">Czy na pewno chcesz usunąć zadanie <span class="font-weight-bold">"{{data.taskName}}"</span> ?</p>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<div class="my-4 text-right">
+  <button class="ml-3" mat-stroked-button color="warn" mat-dialog-close>Nie</button>
+  <!-- <button class="ml-3" mat-raised-button color="primary" [mat-dialog-close]="data.task" cdkFocusInitial -->
+  <!-- (click)="deleteTask()">Usuń</button> -->
+  <button class="ml-3" mat-raised-button color="primary" (click)="deleteTask()" [mat-dialog-close]="data"
+    cdkFocusInitial>Usuń</button>
+</div>

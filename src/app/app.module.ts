@@ -1,3 +1,4 @@
+import { ToastService } from "./shared/services/toast.service";
 import { RemainingTimeSharedService } from "./shared/services/remaining-time-shared.service";
 import { UserService } from "./user/user.service";
 import { UserModule } from "./user/user.module";
@@ -28,6 +29,8 @@ import {
 } from "@angular-material-components/datetime-picker";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { CountdownModule } from "ngx-countdown";
+import { NgxDatatableModule } from "@swimlane/ngx-datatable";
+import { ConfirmationComponent } from "./shared/confirmation/confirmation.component";
 
 @NgModule({
   declarations: [AppComponent],
@@ -51,6 +54,7 @@ import { CountdownModule } from "ngx-countdown";
     NgSelectModule,
     CountdownModule,
     UserModule,
+    NgxDatatableModule,
   ],
   providers: [
     AuthService,
@@ -61,6 +65,7 @@ import { CountdownModule } from "ngx-countdown";
     PageTitleSharedService,
     RemainingTimeSharedService,
   ],
+  entryComponents: [ConfirmationComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

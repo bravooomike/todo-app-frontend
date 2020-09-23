@@ -11,6 +11,7 @@
       <mat-form-field class="d-block">
         <input formControlName="content" matInput placeholder="Szczegóły zadania">
       </mat-form-field>
+
       <app-task-type formControlName="taskType"></app-task-type>
       <app-task-status formControlName="taskStatus"></app-task-status>
 
@@ -18,6 +19,7 @@
         <input matInput [ngxMatDatetimePicker]="pickercreatedDate" placeholder="Data dodania zadania"
           formControlName="createdDate">
         <mat-datepicker-toggle matSuffix [for]="pickercreatedDate"></mat-datepicker-toggle>
+        <mat-error>Data dodania zadania jest wymagana</mat-error>
         <ngx-mat-datetime-picker #pickercreatedDate></ngx-mat-datetime-picker>
       </mat-form-field>
 
@@ -25,6 +27,7 @@
         <input matInput [ngxMatDatetimePicker]="pickerexpiredDate" placeholder="Do kiedy zadanie ma zostać zakończone"
           formControlName="expiredDate">
         <mat-datepicker-toggle matSuffix [for]="pickerexpiredDate"></mat-datepicker-toggle>
+        <mat-error>Data zakończenia zadania jest wymagana</mat-error>
         <ngx-mat-datetime-picker #pickerexpiredDate></ngx-mat-datetime-picker>
       </mat-form-field>
 

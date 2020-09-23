@@ -21,9 +21,19 @@ import {
   MatListModule,
   MatSortModule,
   MatDatepickerModule,
-  // MatDatepickerToggle,
-  // MatDatepicker,
 } from "@angular/material";
+
+const MAT_SNACK_BAR_GLOBAL_CONFIG: MatSnackBarConfig = {
+  duration: 3000,
+  verticalPosition: "bottom",
+  horizontalPosition: "center",
+};
+
+const MAT_DIALOG_GLOBAL_CONFIG: MatDialogConfig = {
+  width: "500px",
+  disableClose: true,
+  hasBackdrop: true,
+};
 
 const MATERIAL_MODULE = [
   MatIconModule,
@@ -40,13 +50,18 @@ const MATERIAL_MODULE = [
   MatListModule,
   MatSortModule,
   MatDatepickerModule,
-  // MatDatepickerToggle,
-  // MatDatepicker,
 ];
 
 @NgModule({
   declarations: [],
   imports: [CommonModule],
   exports: [...MATERIAL_MODULE],
+  providers: [
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: MAT_SNACK_BAR_GLOBAL_CONFIG,
+    },
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: MAT_DIALOG_GLOBAL_CONFIG },
+  ],
 })
 export class MaterialModule {}

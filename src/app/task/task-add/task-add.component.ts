@@ -1,9 +1,11 @@
+import { ToastService } from "./../../shared/services/toast.service";
 import { Component, OnInit } from "@angular/core";
 import { Task } from "../task.model";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TaskService } from "../task.service";
 import { PageTitleSharedService } from "src/app/shared/services/page-title-shared.service";
+import { MatSnackBar, MatDialog } from "@angular/material";
 
 @Component({
   selector: "app-task-add",
@@ -20,7 +22,9 @@ export class TaskAddComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private taskService: TaskService,
     private router: Router,
-    private pageTitleSharedService: PageTitleSharedService
+    private pageTitleSharedService: PageTitleSharedService,
+    private matSnackBar: MatSnackBar,
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -40,9 +44,15 @@ export class TaskAddComponent implements OnInit {
   }
 
   public addTask() {
-    this.taskService.addTask(this.taskForm.value).subscribe(() => {
-      this.router.navigateByUrl("/task");
-    });
+    this.taskService.addTask(this.taskForm.value).subscribe(
+      () => {
+        this.toastService.success("Zadanie dodane z sukcesem");
+        this.router.navigateByUrl("/task");
+      },
+      (error) => {
+        this.toastService.failure("Nie udało się zapisać zadania");
+      }
+    );
   }
 
   public back() {

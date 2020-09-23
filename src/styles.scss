@@ -1,4 +1,7 @@
 @import "~@ng-select/ng-select/themes/material.theme.css";
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/material.scss';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
 
 * {
   margin: 0;
@@ -7,21 +10,44 @@
 }
 
 :root {
-  --color-main: #3F51B5;
-  --color-secondary: #E0D622;
+  --color-main: #3f51b5;
+  --color-secondary: #e0d622;
   font-size: 10px;
 }
 
 body {
-  font-family: 'Lato', sans-serif;
-  font-family: 'Dancing Script', cursive;
+  font-family: "Lato", sans-serif;
+  font-family: "Dancing Script", cursive;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 1.6rem;
 }
 
-[type=button]:not(:disabled),
-[type=reset]:not(:disabled),
-[type=submit]:not(:disabled),
+[type="button"]:not(:disabled),
+[type="reset"]:not(:disabled),
+[type="submit"]:not(:disabled),
 button:not(:disabled) {
   outline: none;
+}
+
+.toast-success {
+  background-color: green;
+  text-align: center;
+}
+
+.toast-error {
+  background-color: red;
+  text-align: center;
+}
+
+.toast-info {
+  background-color: blue;
+  text-align: center;
+}
+
+.mat-fab.mat-primary,
+.mat-flat-button.mat-primary,
+.mat-mini-fab.mat-primary,
+.mat-raised-button.mat-primary,
+.mat-stroked-button:not([disabled]) {
+  border-radius: 0;
 }

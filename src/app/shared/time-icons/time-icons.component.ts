@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, OnDestroy } from "@angular/core";
 import {
   faHourglassStart,
   faHourglassHalf,
@@ -11,7 +11,7 @@ import { Task } from "src/app/task/task.model";
   templateUrl: "./time-icons.component.html",
   styleUrls: ["./time-icons.component.scss"],
 })
-export class TimeIconsComponent implements OnInit {
+export class TimeIconsComponent implements OnInit, OnDestroy {
   public faHourglassStart = faHourglassStart;
   public faHourglassHalf = faHourglassHalf;
   public faHourglassEnd = faHourglassEnd;
@@ -29,5 +29,9 @@ export class TimeIconsComponent implements OnInit {
         new Date(this.task.expiredDate).getTime() - new Date().getTime();
       // console.log(this.remainingTime);
     }, 1000);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.interval);
   }
 }

@@ -1,3 +1,4 @@
+import { TaskStatus } from "./task-status/task-status.model";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
@@ -20,6 +21,15 @@ export class TaskService {
 
   public editTask(task: Task, id: number): Observable<Task> {
     return this.httpClient.put<Task>(`${this.url}/${id}`, task);
+  }
+
+  public changeTaskStatus(
+    task: Task,
+    id: number,
+    status: TaskStatus
+  ): Observable<Task> {
+    task.taskStatus = status;
+    return this.editTask(task, id);
   }
 
   public addTask(task: Task): Observable<Task> {

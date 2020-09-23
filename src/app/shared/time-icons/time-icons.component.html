@@ -1,4 +1,4 @@
-<fa-icon *ngIf="task.taskStatus.name === 'zaplanowane'" [icon]="faHourglassStart"></fa-icon>
-<fa-icon [ngClass]="{'warning': remainingTime < 0, 'success': remainingTime > 0}"
-  *ngIf="task.taskStatus.name === 'w trakcie'" [icon]="faHourglassHalf"></fa-icon>
-<fa-icon *ngIf="task.taskStatus.name === 'zakonczone'" [icon]="faHourglassEnd"></fa-icon>
+<fa-icon *ngIf="task.taskStatus.code === 'zap'" [icon]="faHourglassStart"></fa-icon>
+<fa-icon [ngClass]="{'warning': remainingTime < 0, 'success': remainingTime > 0}" *ngIf="task.taskStatus.code === 'wtr'"
+  [icon]="faHourglassHalf"></fa-icon>
+<fa-icon *ngIf="task.taskStatus.code === 'zak'" [icon]="faHourglassEnd"></fa-icon>
