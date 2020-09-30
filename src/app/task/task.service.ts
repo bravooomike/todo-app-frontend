@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Task } from "./task.model";
+import { Page } from "../shared/model/page.model";
 
 @Injectable({
   providedIn: "root",
@@ -11,8 +12,10 @@ export class TaskService {
   private url: string = "/rest/todo/task";
   constructor(private httpClient: HttpClient) {}
 
-  public getAll(): Observable<Task[]> {
-    return this.httpClient.get<Task[]>(`${this.url}/`);
+  public getAll(pageNumber: number, pageSize: number): Observable<Page<Task>> {
+    return this.httpClient.get<Page<Task>>(`${this.url}/`, {
+      params: { size: pageSize.toString(), page: pageNumber.toString() },
+    });
   }
 
   public getOne(id: number): Observable<Task> {

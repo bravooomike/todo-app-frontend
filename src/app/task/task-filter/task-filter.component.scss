@@ -4,5 +4,10 @@
 
   input {
     width: 300px;
+    border-radius: 0;
+    padding: 2px 5px;
+    &:focus {
+      border-radius: 0;
+    }
   }
 }

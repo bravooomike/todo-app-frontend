@@ -55,12 +55,24 @@ export class TaskListComponent implements OnInit {
   //   { displayedName: "Akcje", name: "null" },
   // ];
 
-  // public columns = [];
+  public columns = [
+    { name: "#" },
+    { name: "Zadanie" },
+    { name: "Szczegóły" },
+    { name: "Typ zadania" },
+    { name: "Status zadania" },
+    { name: "Data dodania" },
+    { name: "Do kiedy?" },
+    { name: "Przekroczenie" },
+    { name: "Data zakończenia" },
+    { name: "Akcje" },
+  ];
 
   public isSorted: boolean = false;
 
-  // @ViewChild(ConfirmationComponent, { static: false })
-  // conf: ConfirmationComponent;
+  public pageSize: number = 5;
+  public count: number = 0;
+  public offset: number = 0;
 
   constructor(
     private taskService: TaskService,
@@ -70,15 +82,18 @@ export class TaskListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getAll();
+    this.getAll(0);
     this.getTaskStatuses();
   }
 
-  public getAll() {
+  public getAll(pageNumber: number) {
     this.loadingIndicator = true;
     this.tasks = [];
-    this.taskService.getAll().subscribe((tasks) => {
-      this.tasks = tasks;
+    this.taskService.getAll(pageNumber, this.pageSize).subscribe((result) => {
+      console.log(result);
+      this.tasks = result.content;
+      this.count = result.totalElements;
+      this.offset = pageNumber;
       this.loadingIndicator = false;
       // console.log(this.tasks);
       this.onFilterChanged(null);
@@ -102,8 +117,13 @@ export class TaskListComponent implements OnInit {
       data: { taskId: task.id, taskName: task.summary },
     });
     dialogRef.afterClosed().subscribe(() => {
-      this.getAll();
+      this.getAll(0);
     });
+  }
+
+  public setPage(e) {
+    // console.log(e);
+    this.getAll(e.offset);
   }
 
   public onFilterChanged(value: string) {
@@ -193,7 +213,7 @@ export class TaskListComponent implements OnInit {
       );
       this.taskService
         .changeTaskStatus(task, task.id, taskStatusEnd)
-        .subscribe(() => this.getAll());
+        .subscribe(() => this.getAll(0));
     }
   }
 }

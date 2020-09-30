@@ -1,10 +1,12 @@
 <div class="table-container">
   <ngx-datatable class="material table-content" [rows]="filteredTasks" [loadingIndicator]="loadingIndicator"
-    [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [reorderable]="reorderable" [columnMode]="ColumnMode.flex">
+    [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [reorderable]="reorderable" [columnMode]="ColumnMode.flex"
+    [columns]="columns" [externalPaging]="true" [count]="count" [offset]="offset" (page)="setPage($event)"
+    [limit]="pageSize">
 
-    <ngx-datatable-column name="#" class="icons-column" [flexGrow]=1 draggable=false [sortable]=true>
-      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
-      </ng-template>
+    <ngx-datatable-column name="#" class="icons-column" [flexGrow]=1 [sortable]=false [headerClass]="'custom-header'">
+      <!-- <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
+      </ng-template> -->
       <ng-template let-task="row" ngx-datatable-cell-template>
         <span class="task-status-done">
           <app-time-icons [task]="task"></app-time-icons>
@@ -12,74 +14,56 @@
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column name="Zadanie" [flexGrow]=3>
-      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
-      </ng-template>
+    <ngx-datatable-column name="Zadanie" [flexGrow]=3 [sortable]="true" prop="summary">
       <ng-template let-task="row" ngx-datatable-cell-template>
         <span [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{ task.summary }}</span>
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column name="Szczegóły" [flexGrow]=3>
-      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
-      </ng-template>
+    <ngx-datatable-column name="Szczegóły" [flexGrow]=3 [sortable]="true" prop="content">
       <ng-template let-task="row" ngx-datatable-cell-template>
         <span [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{ task.content }}</span>
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column name="Typ zadania" [flexGrow]=2>
-      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
-      </ng-template>
+    <ngx-datatable-column name="Typ zadania" [flexGrow]=2 [sortable]="true" prop="taskType.name">
       <ng-template let-task="row" ngx-datatable-cell-template>
         <span [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{ task.taskType.name }}</span>
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column name="Status zadania" [flexGrow]=2>
-      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
-      </ng-template>
+    <ngx-datatable-column name="Status zadania" [flexGrow]=2 [sortable]="true" prop="taskStatus.name">
       <ng-template let-task="row" ngx-datatable-cell-template>
         <span [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{ task.taskStatus.name }}</span>
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column name="Data dodania" [flexGrow]=2>
-      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
-      </ng-template>
+    <ngx-datatable-column name="Data dodania" [flexGrow]=2 [sortable]="true" prop="createdDate">
       <ng-template let-task="row" ngx-datatable-cell-template>
         <span [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{task.createdDate | date: 'dd.LL.yyyy'}}</span>
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column name="Do kiedy?" [flexGrow]=2>
-      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
-      </ng-template>
+    <ngx-datatable-column name="Do kiedy?" [flexGrow]=2 [sortable]="true" prop="expiredDate">
       <ng-template let-task="row" ngx-datatable-cell-template>
         <span [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{task.expiredDate | date: 'dd.LL.yyyy'}}</span>
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column name="Przekroczenie" [flexGrow]=2>
-      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
-      </ng-template>
+    <ngx-datatable-column name="Przekroczenie" [flexGrow]=2 [sortable]=false>
       <ng-template let-task="row" ngx-datatable-cell-template>
         <app-countdown *ngIf="task.taskStatus.name !== 'zakonczone'" [endDate]="task.expiredDate">
         </app-countdown>
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column name="Data zakończenia" [flexGrow]=2>
-      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
-      </ng-template>
+    <ngx-datatable-column name="Data zakończenia" [flexGrow]=2 [sortable]=false>
       <ng-template let-task="row" ngx-datatable-cell-template>
         <span [ngClass]="{'task-ended': task.taskStatus.code === 'zak'}">{{task.endedDate | date: 'dd.LL.yyyy'}}</span>
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column name="Akcje" class="actions-column" [flexGrow]=3>
-      <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}
-      </ng-template>
+    <ngx-datatable-column name="Akcje" class="actions-column" [flexGrow]=3 [sortable]=false>
       <ng-template let-task="row" ngx-datatable-cell-template>
         <div class="d-flex flex-nowrap">
           <button (click)="goToEdit(task.id)">

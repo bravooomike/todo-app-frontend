@@ -1,3 +1,4 @@
+import { ToastService } from "./../services/toast.service";
 import { TaskService } from "./../../task/task.service";
 import { Component, OnInit, Inject } from "@angular/core";
 import {
@@ -17,6 +18,7 @@ export class ConfirmationComponent implements OnInit {
 
   constructor(
     private taskService: TaskService,
+    private toastService: ToastService,
     public dialogRef: MatDialogRef<ConfirmationComponent>,
     @Inject(MAT_DIALOG_DATA) public data
   ) {}
@@ -27,7 +29,14 @@ export class ConfirmationComponent implements OnInit {
     if (!this.data.taskId) {
       return;
     } else {
-      this.taskService.deleteTask(this.data.taskId).subscribe();
+      this.taskService.deleteTask(this.data.taskId).subscribe(
+        () => {
+          this.toastService.success("Usunięcie zadania zakończone sukcesem.");
+        },
+        (error) => {
+          this.toastService.failure("Zadanie nie zostało usunięte.");
+        }
+      );
     }
   }
 }
