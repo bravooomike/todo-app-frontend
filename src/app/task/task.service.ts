@@ -12,9 +12,19 @@ export class TaskService {
   private url: string = "/rest/todo/task";
   constructor(private httpClient: HttpClient) {}
 
-  public getAll(pageNumber: number, pageSize: number): Observable<Page<Task>> {
+  public getAll(
+    filterValue: string,
+    allTasksDisplay: boolean,
+    pageNumber: number,
+    pageSize: number
+  ): Observable<Page<Task>> {
     return this.httpClient.get<Page<Task>>(`${this.url}/`, {
-      params: { size: pageSize.toString(), page: pageNumber.toString() },
+      params: {
+        filter: filterValue,
+        allTasks: allTasksDisplay.toString(),
+        size: pageSize.toString(),
+        page: pageNumber.toString(),
+      },
     });
   }
 
@@ -42,4 +52,6 @@ export class TaskService {
   public deleteTask(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
+
+  // public filterTasks() {}
 }

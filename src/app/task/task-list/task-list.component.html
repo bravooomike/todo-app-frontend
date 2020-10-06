@@ -1,8 +1,7 @@
 <div class="table-container">
-  <ngx-datatable class="material table-content" [rows]="filteredTasks" [loadingIndicator]="loadingIndicator"
-    [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [reorderable]="reorderable" [columnMode]="ColumnMode.flex"
-    [columns]="columns" [externalPaging]="true" [count]="count" [offset]="offset" (page)="setPage($event)"
-    [limit]="pageSize">
+  <ngx-datatable class="material table-content" [rows]="tasks" [loadingIndicator]="loadingIndicator" [headerHeight]="50"
+    [footerHeight]="50" rowHeight="auto" [reorderable]="reorderable" [columnMode]="ColumnMode.flex" [columns]="columns"
+    [externalPaging]="true" [count]="count" [offset]="offset" (page)="setPage($event)" [limit]="pageSize">
 
     <ngx-datatable-column name="#" class="icons-column" [flexGrow]=1 [sortable]=false [headerClass]="'custom-header'">
       <!-- <ng-template let-column="column" ngx-datatable-header-template>{{column.name}}

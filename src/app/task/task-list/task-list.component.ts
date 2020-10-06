@@ -40,6 +40,8 @@ export class TaskListComponent implements OnInit {
 
   public isDetailsActive: boolean = false;
   public taskDetails: Task;
+  public filterValue: string = "";
+  public allTasksDisplay: boolean = false;
 
   // public settings = [
   //   { displayedName: "#", name: "null" },
@@ -89,16 +91,18 @@ export class TaskListComponent implements OnInit {
   public getAll(pageNumber: number) {
     this.loadingIndicator = true;
     this.tasks = [];
-    this.taskService.getAll(pageNumber, this.pageSize).subscribe((result) => {
-      console.log(result);
-      this.tasks = result.content;
-      this.count = result.totalElements;
-      this.offset = pageNumber;
-      this.loadingIndicator = false;
-      // console.log(this.tasks);
-      this.onFilterChanged(null);
-      this.onCheckedChange(false);
-    });
+    this.taskService
+      .getAll(this.filterValue, this.allTasksDisplay, pageNumber, this.pageSize)
+      .subscribe((result) => {
+        console.log(result);
+        this.tasks = result.content;
+        this.count = result.totalElements;
+        this.offset = pageNumber;
+        this.loadingIndicator = false;
+        // console.log(this.tasks);
+        // this.onFilterChanged(null);
+        // this.onCheckedChange(false);
+      });
   }
 
   public getTaskStatuses() {
@@ -126,73 +130,83 @@ export class TaskListComponent implements OnInit {
     this.getAll(e.offset);
   }
 
+  // public onFilterChanged(value: string) {
+  //   if (!value || value === "") {
+  //     this.filteredTasks = this.tasks;
+  //   } else {
+  //     this.filteredTasks = this.tasks.filter((task) => {
+  //       const textToFilter =
+  //         task.id +
+  //         task.summary +
+  //         task.content +
+  //         task.taskType.name +
+  //         task.taskStatus.name +
+  //         task.createdDate +
+  //         task.expiredDate +
+  //         task.endedDate;
+  //       return textToFilter.toLowerCase().search(value.toLowerCase()) !== -1;
+  //     });
+  //   }
+  // }
+
   public onFilterChanged(value: string) {
-    if (!value || value === "") {
-      this.filteredTasks = this.tasks;
-    } else {
-      this.filteredTasks = this.tasks.filter((task) => {
-        const textToFilter =
-          task.id +
-          task.summary +
-          task.content +
-          task.taskType.name +
-          task.taskStatus.name +
-          task.createdDate +
-          task.expiredDate +
-          task.endedDate;
-        return textToFilter.toLowerCase().search(value.toLowerCase()) !== -1;
-      });
-    }
+    this.filterValue = value;
+    this.getAll(0);
   }
 
   public onCheckedChange(value: boolean) {
-    if (value) {
-      this.filteredTasks = this.tasks;
-    } else {
-      this.filteredTasks = this.tasks.filter((el) => {
-        return el.taskStatus.code !== "zak";
-      });
-    }
+    this.allTasksDisplay = value;
+    this.getAll(0);
   }
 
-  public sortItems(e) {
-    // this.filteredTasks = this.tasks.sort((a, b) => {
-    this.filteredTasks.sort((a, b) => {
-      const name = e.target.id;
-      const x = this.getValue(a[name]);
-      const y = this.getValue(b[name]);
+  // public onCheckedChange(value: boolean) {
+  //   if (value) {
+  //     this.filteredTasks = this.tasks;
+  //   } else {
+  //     this.filteredTasks = this.tasks.filter((el) => {
+  //       return el.taskStatus.code !== "zak";
+  //     });
+  //   }
+  // }
 
-      console.log(x);
-      console.log(y);
+  // public sortItems(e) {
+  //   // this.filteredTasks = this.tasks.sort((a, b) => {
+  //   this.filteredTasks.sort((a, b) => {
+  //     const name = e.target.id;
+  //     const x = this.getValue(a[name]);
+  //     const y = this.getValue(b[name]);
 
-      if (!this.isSorted) {
-        if (x < y) {
-          return -1;
-        }
-        if (x > y) {
-          return 1;
-        }
-        return 0;
-      } else {
-        if (x > y) {
-          return -1;
-        }
-        if (x < y) {
-          return 1;
-        }
-        return 0;
-      }
-    });
-    this.isSorted = !this.isSorted;
-  }
+  //     console.log(x);
+  //     console.log(y);
 
-  private getValue(value: string | number): string | number {
-    if (typeof value === "string") {
-      return value.toLowerCase();
-    } else {
-      return value;
-    }
-  }
+  //     if (!this.isSorted) {
+  //       if (x < y) {
+  //         return -1;
+  //       }
+  //       if (x > y) {
+  //         return 1;
+  //       }
+  //       return 0;
+  //     } else {
+  //       if (x > y) {
+  //         return -1;
+  //       }
+  //       if (x < y) {
+  //         return 1;
+  //       }
+  //       return 0;
+  //     }
+  //   });
+  //   this.isSorted = !this.isSorted;
+  // }
+
+  // private getValue(value: string | number): string | number {
+  //   if (typeof value === "string") {
+  //     return value.toLowerCase();
+  //   } else {
+  //     return value;
+  //   }
+  // }
 
   public activateTaskDetails(task) {
     this.isDetailsActive = true;
